@@ -11,7 +11,7 @@
 <form id="upload-form">
 <label id="dropzone" class="dropzone" for="pdf"><span class="file-icon" aria-hidden="true"><svg width="30" height="34" viewBox="0 0 30 34" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2H5v30h21V10L18 2Z"/><path d="M18 2v8h8M15 26V15m-5 5 5-5 5 5"/></svg></span><strong id="file-name">논문 PDF를 여기에 놓아 주세요</strong><span>또는 클릭하여 파일 선택</span><small>텍스트 PDF · 최대 20MB / 300페이지 / 참고문헌 200개</small><input id="pdf" name="file" type="file" accept="application/pdf,.pdf" required></label>
 <div class="connection-tools"><button id="check-connection" type="button" class="secondary">검색 연결 점검</button><span id="app-version"></span><p id="connection-result" role="status" hidden></p></div><div class="ai-option"><label><input id="use-ai" type="checkbox"> <strong>AI로 인용 내용도 예비 검토</strong></label><p id="ai-note">초록과 본문 인용 문장을 비교합니다. API 설정 확인 중…</p></div>
-<p class="privacy">검증을 시작하면 추출한 참고문헌을 Crossref로, 미확인 DOI를 DataCite로 전송합니다. AI 선택 시 인용 문장과 초록을 OpenAI로 전송합니다. PDF 원본은 저장하지 않으며 결과는 완료 후 30분간 메모리에 보관합니다.</p>
+<p class="privacy">검증을 시작하면 추출한 참고문헌을 Crossref로, 미확인 DOI를 DataCite로, arXiv ID를 arXiv로 전송합니다. AI 선택 시 인용 문장과 초록을 OpenAI로 전송합니다. PDF 원본은 저장하지 않으며 결과는 완료 후 30분간 메모리에 보관합니다.</p>
 <button id="submit" class="primary" type="submit">참고문헌 검증 시작 <span>↗</span></button>
 <p id="error" class="error" role="alert" hidden></p>
 </form></div>

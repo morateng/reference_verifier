@@ -13,6 +13,8 @@ from fastapi.staticfiles import StaticFiles
 from app.extraction import extract_pdf
 from app.verification import verify_reference
 from app.reporting import VERSION, evidence, summarize
+from app.providers import provider_get, parse_arxiv
+from xml.etree.ElementTree import ParseError
 
 STATIC = Path(__file__).parent / "static"
 MAX_BYTES = 20 * 1024 * 1024
@@ -46,21 +48,25 @@ def health():
 async def diagnostics():
     async def probe(name, url, params):
         try:
-            response = await app.state.client.get(url, params=params, timeout=7)
+            response = await provider_get(app.state.client, url, params=params, timeout=7, attempts=1)
             response.raise_for_status()
-            payload = response.json()
-            valid = isinstance(payload.get("message"), dict) if name == "Crossref" else isinstance(payload.get("data"), list)
+            if name == "arXiv":
+                valid = parse_arxiv(response.content, "2301.02111") is not None
+            else:
+                payload = response.json()
+                valid = isinstance(payload.get("message"), dict) if name == "Crossref" else isinstance(payload.get("data"), list)
             return {"source": name, "ok": valid, "http_status": response.status_code, "reason": "조회 연결 정상" if valid else "등록기관 응답 형식 확인 실패"}
         except httpx.HTTPStatusError as exc:
             code = exc.response.status_code
             return {"source": name, "ok": False, "http_status": code, "reason": f"HTTP {code}: " + {403: "접근 거부", 429: "요청 제한"}.get(code, "서비스 오류")}
         except httpx.TimeoutException:
             return {"source": name, "ok": False, "http_status": None, "reason": "응답 시간 초과"}
-        except (httpx.HTTPError, ValueError):
+        except (httpx.HTTPError, ValueError, ParseError):
             return {"source": name, "ok": False, "http_status": None, "reason": "연결 또는 응답 실패"}
     sources = await asyncio.gather(
         probe("Crossref", "https://api.crossref.org/works/10.1038/nature14539", {}),
         probe("DataCite", "https://api.datacite.org/dois", {"page[size]": 1}),
+        probe("arXiv", "https://export.arxiv.org/api/query", {"id_list": "2301.02111", "max_results": 1}),
     )
     return {"version": VERSION, "sources": sources, "note": "고정된 공개 API 요청으로 연결만 점검합니다. 논문 검증 정확도 평가는 아닙니다."}
 
@@ -114,7 +120,7 @@ async def create_job(background: BackgroundTasks, file: UploadFile = File(...), 
         JOBS[job_id] = {"id": job_id, "version": VERSION, "filename": (file.filename or "paper.pdf")[:200], "created_at": time.time(),
                         "state": "running", "total": len(parsed["references"]), "completed": 0,
                         "page_count": parsed["page_count"], "warnings": parsed["warnings"], "results": [],
-                        "scope": "Crossref·DataCite 등록정보 대조. 전체 저자의 이니셜·순서, 학술적 타당성, 철회 여부를 완전히 검증하지 않습니다. AI는 초록 기반 예비 검토입니다."}
+                        "scope": "Crossref·DataCite·arXiv 등록정보 대조. 전체 저자의 이니셜·순서, 학술적 타당성, 철회 여부를 완전히 검증하지 않습니다. AI는 초록 기반 예비 검토입니다."}
         background.add_task(run_job, job_id, parsed, use_ai)
         return {"id": job_id}
     except BaseException:

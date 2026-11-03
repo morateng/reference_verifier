@@ -8,6 +8,11 @@ DOI_RE = re.compile(r"10\.\d{4,9}/[^\s<>\"\]]+", re.I)
 YEAR_RE = re.compile(r"\b(?:19|20)\d{2}[a-z]?\b")
 HEADING = re.compile(r"^\s*(?:\d+[.\s]+)?(?:references|bibliography|works cited|참고\s*문헌)\s*[:.]?\s*$", re.I | re.M)
 NUMBERED = re.compile(r"^\s*(?:\[(\d{1,3})\]|(\d{1,3})[.)])\s+")
+SURNAME = r"[^\W\d][^,;.\n]{0,60}?"
+INITIALS = r"[A-Z]\s*\.(?:\s*[-–]?\s*[A-Z]\s*\.)*"
+AUTHOR = SURNAME + r",\s*" + INITIALS
+AUTHOR_YEAR = re.compile(r"(?P<authors>" + AUTHOR + r"(?:\s*;\s*(?:and\s+)?" + AUTHOR + r")*(?:\s*;?\s*et\s+al\.)?)\s*[（(]?(?P<year>(?:19|20)\d{2}[a-z]?)[）)]?\.")
+ARXIV_RE = re.compile(r"(?:arxiv\s*:\s*|arxiv\.org/(?:abs|pdf)/)(\d{4}\.\d{4,5}(?:v\d+)?|[a-z-]+(?:\.[A-Z]{2})?/\d{7}(?:v\d+)?)", re.I)
 
 
 def extract_pdf(data: bytes) -> dict:
@@ -61,6 +66,20 @@ def extract_text(pages: list[str]) -> dict:
             preamble.append(line)
     if current:
         entries.append({"label": label, "raw": " ".join(current)})
+    if not numbered:
+        # A year on a continuation line is not an entry boundary. Match the entire
+        # author list + year across line wraps (common in AAAI/arXiv references).
+        combined = " ".join(lines)
+        headers = list(AUTHOR_YEAR.finditer(combined))
+        # Restrict this parser to the semicolon author-list style it understands.
+        # Comma-separated APA lists need their existing paragraph boundaries.
+        if headers and sum(";" in m.group("authors") for m in headers) >= max(1, len(headers) / 2):
+            entries = [{"label": str(i + 1), "raw": combined[m.start():headers[i + 1].start() if i + 1 < len(headers) else len(combined)].strip(),
+                        "year": m.group("year")[:4], "year_suffix": m.group("year")[4:],
+                        "author_text": m.group("authors"), "first_surname": m.group("authors").split(",", 1)[0].strip(),
+                        "extraction_method": "complete_author_year_header"}
+                       for i, m in enumerate(headers)]
+            preamble = [combined[:headers[0].start()].strip()] if combined[:headers[0].start()].strip() else []
     if not entries:
         raise ValueError("참고문헌 항목을 구분하지 못했습니다. 현재는 번호형 및 저자–연도형 참고문헌을 지원합니다.")
     if preamble:
@@ -81,7 +100,11 @@ def extract_text(pages: list[str]) -> dict:
             while entry["doi"].endswith(")") and entry["doi"].count(")") > entry["doi"].count("("):
                 entry["doi"] = entry["doi"][:-1]
         year = YEAR_RE.search(entry["raw"])
-        entry["year"] = year.group()[:4] if year else None
+        entry.setdefault("year", year.group()[:4] if year else None)
+        arxiv = ARXIV_RE.search(entry["raw"])
+        entry["arxiv_id"] = arxiv.group(1) if arxiv else None
+        if len(list(AUTHOR_YEAR.finditer(entry["raw"]))) > 1:
+            entry["extraction_flags"].append("한 항목에서 여러 저자·연도 시작부를 찾았습니다. 항목 병합 여부를 확인하세요.")
         entry["contexts"] = find_contexts(body, entry, numbered)
     labels = [e["label"] for e in entries]
     if len(labels) != len(set(labels)):
@@ -103,9 +126,9 @@ def find_contexts(body: str, entry: dict, numbered: bool) -> list[str]:
             if int(entry["label"]) in labels:
                 spans.append(m.span())
     elif entry.get("year"):
-        surname = re.match(r"[\wÀ-ž가-힣'-]+", entry["raw"])
+        surname = entry.get("first_surname") or (re.match(r"[\wÀ-ž가-힣'-]+", entry["raw"]).group() if re.match(r"[\wÀ-ž가-힣'-]+", entry["raw"]) else "")
         if surname:
-            pattern = r"\b" + re.escape(surname.group()) + r"\b(?:\s+et\s+al\.)?[^.!?\n]{0,90}?" + re.escape(entry["year"])
+            pattern = r"\b" + re.escape(surname) + r"\b(?:\s+et\s+al\.)?[^.!?\n]{0,90}?" + re.escape(entry["year"]) + re.escape(entry.get("year_suffix", ""))
             spans = [m.span() for m in re.finditer(pattern, body, re.I)]
     contexts = []
     for start, end in spans:

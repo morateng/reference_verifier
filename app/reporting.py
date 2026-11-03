@@ -1,18 +1,19 @@
 """Expose evidence and failure causes without changing matching thresholds."""
 from collections import Counter
 
-VERSION = "0.2.0-diagnostics"
+VERSION = "0.3.0-reference-boundaries"
 
 
 def evidence(result: dict) -> dict:
     has_record = bool(result.get("record"))
     direct_doi = has_record and result.get("matched_by") == "doi"
+    direct_arxiv = has_record and result.get("matched_by") == "arxiv_id"
     fields = {c["field"]: c["status"] for c in result.get("checks", [])}
     identity = has_record and result.get("status") != "candidate" and all(
         fields.get(f) == "match" for f in ("제목", "첫 저자", "발행연도")
     )
     return {
-        "registry": "doi_registered" if direct_doi else "search_candidate" if has_record else "lookup_failed" if result["status"] == "error" else "not_resolved",
+        "registry": "doi_registered" if direct_doi else "arxiv_registered" if direct_arxiv else "search_candidate" if has_record else "lookup_failed" if result["status"] == "error" else "not_resolved",
         "identity": "major_fields_match" if identity else "not_established",
         "bibliography": "differences_detected" if any(v == "review" for v in fields.values()) else "checked_fields_match" if fields and all(v == "match" for v in fields.values()) else "partially_checked" if fields else "not_checked",
         "content": result.get("content_check", {}).get("status", "unverified"),
@@ -26,6 +27,7 @@ def summarize(results: list[dict], total: int) -> dict:
     return {
         "total": total, "processed": len(results),
         "doi_registered": sum(d["registry"] == "doi_registered" for d in dimensions),
+        "arxiv_registered": sum(d["registry"] == "arxiv_registered" for d in dimensions),
         "major_fields_match": sum(d["identity"] == "major_fields_match" for d in dimensions),
         "unresolved": sum(r["status"] == "unverified" for r in results),
         "lookup_failed": sum(r["status"] == "error" for r in results),

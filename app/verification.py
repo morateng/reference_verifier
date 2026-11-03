@@ -1,4 +1,3 @@
-import asyncio
 import html
 import json
 import os
@@ -7,12 +6,20 @@ from urllib.parse import quote
 
 import httpx
 from rapidfuzz import fuzz
+from app.providers import provider_get, arxiv_work
+from app.extraction import ARXIV_RE
+from xml.etree.ElementTree import ParseError
 
 
 def normalize(value: str) -> str:
     import unicodedata
-    value = unicodedata.normalize("NFKD", html.unescape(value).casefold())
+    value = re.sub(r"(?<=\w)\s*[¨´`]\s*(?=\w)", "", html.unescape(value))
+    value = unicodedata.normalize("NFKD", value.casefold())
     value = "".join(c for c in value if not unicodedata.combining(c))
+    value = value.replace("\u00ad", "")
+    # PDF word wrapping can produce 'consol- idate'; compare both soft wraps and
+    # intra-word hyphens consistently, while preserving the original citation.
+    value = re.sub(r"(?<=\w)[-‐‑]\s*(?=\w)", "", value)
     return re.sub(r"[^\w]+", " ", value).strip()
 
 
@@ -25,7 +32,7 @@ def signals(reference: dict, record: dict) -> dict:
     year = re.search(r"\b(?:19|20)\d{2}\b", raw)
     if year:
         boundary = min(boundary, year.start())
-    author_text = raw[:boundary].strip()
+    author_text = normalize(reference["author_text"]) if reference.get("author_text") else raw[:boundary].strip()
     positions = []
     missing = []
     for surname in record["surnames"]:
@@ -91,11 +98,12 @@ def metadata(work: dict) -> dict:
     abstract = re.sub(r"<[^>]+>", " ", work.get("abstract", ""))
     return {"doi": work.get("DOI", ""), "title": (work.get("title") or [""])[0], "authors": authors,
             "source": work.get("_source", "Crossref"), "given_names": [a.get("given", "") for a in work.get("author", [])],
+            "arxiv_id": work.get("_arxiv_id"),
             "surnames": [a.get("family", a.get("name", "")) for a in work.get("author", [])],
             "years": dates, "journal": (work.get("container-title") or [""])[0],
             "volume": work.get("volume", ""), "issue": work.get("issue", ""), "pages": work.get("page", ""),
             "abstract": html.unescape(abstract).strip(), "type": work.get("type", "unknown"),
-            "source_url": "https://doi.org/" + quote(work.get("DOI", ""), safe="/"),
+            "source_url": work.get("_source_url") or "https://doi.org/" + quote(work.get("DOI", ""), safe="/"),
             "updates": work.get("update-to", [])}
 
 
@@ -145,14 +153,9 @@ def citation(record: dict) -> str:
 
 
 async def get_json(client: httpx.AsyncClient, url: str, **kwargs) -> dict:
-    for attempt in range(3):
-        response = await client.get(url, **kwargs)
-        if response.status_code in (429, 502, 503, 504) and attempt < 2:
-            await asyncio.sleep(1 + attempt)
-            continue
-        response.raise_for_status()
-        return response.json()
-    raise RuntimeError("unreachable")
+    response = await provider_get(client, url, **kwargs)
+    response.raise_for_status()
+    return response.json()
 
 
 async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: bool = False) -> dict:
@@ -162,7 +165,18 @@ async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: b
         work = None
         via_doi = False
         invalid_doi = False
-        if reference.get("doi"):
+        identifier = reference.get("arxiv_id")
+        if not identifier:
+            match = ARXIV_RE.search(reference["raw"])
+            identifier = match.group(1) if match else None
+        if identifier:
+            try:
+                work = await arxiv_work(client, identifier)
+                if not work:
+                    result["issues"].append("입력 arXiv ID에 해당하는 메타데이터를 받지 못했습니다. 출판본 후보와 같은 버전으로 확정하지 않습니다.")
+            except (httpx.HTTPError, ParseError, ValueError):
+                result["issues"].append("arXiv 조회 실패: 아래 출판본 후보는 인용한 프리프린트와 별도 검토가 필요합니다.")
+        if work is None and reference.get("doi"):
             try:
                 payload = await get_json(client, "https://api.crossref.org/works/" + quote(reference["doi"], safe=""))
                 work = payload["message"]
@@ -193,10 +207,13 @@ async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: b
             ambiguous = len(ranked) > 1 and ranked[0][0] - ranked[1][0] < 3
             result["candidates"] = [{"title": metadata(w)["title"], "doi": w.get("DOI", ""), "ranking_score": round(score, 1)} for score, w in ranked]
         record = metadata(work)
-        assessed = assess(reference, record, via_doi, ambiguous)
+        assessed = assess(reference, record, via_doi or record["source"] == "arXiv", ambiguous)
         assessed["issues"] = result["issues"] + assessed["issues"]
         result.update(assessed)
-        result.update(record=record, suggested_citation=citation(record), matched_by="doi" if via_doi else "bibliographic_search")
+        result.update(record=record, suggested_citation=citation(record), matched_by="arxiv_id" if record["source"] == "arXiv" else "doi" if via_doi else "bibliographic_search")
+        if identifier and record["source"] != "arXiv":
+            result["status"] = "candidate"
+            result["issues"].append("입력은 arXiv 프리프린트 인용이며 조회 결과는 출판본 후보입니다. 발행연도 차이를 인용 오류로 확정하지 않습니다.")
         if invalid_doi:
             result["issues"].append("입력 DOI는 Crossref에서 확인되지 않았습니다. 다른 등록기관 DOI일 수도 있습니다. 검색 후보 DOI와 비교해 주세요.")
             if result["status"] == "matched":

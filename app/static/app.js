@@ -50,7 +50,7 @@ function render(){
 function renderDiagnosis(job){
   const box=$('#diagnosis'),d=job.diagnosis;box.replaceChildren();if(!d)return;
   box.append(el('h3','검증 단계별 결과 · '+(job.version||'버전 미상')));
-  box.append(el('p',`입력 DOI 등록 확인 ${d.doi_registered}개 · 제목/첫 저자/연도 일치 ${d.major_fields_match}개 · AI 초록 검토 ${d.abstract_reviewed}개`));
+  box.append(el('p',`입력 DOI 등록 확인 ${d.doi_registered}개 · arXiv ID 확인 ${d.arxiv_registered||0}개 · 제목/첫 저자/연도 일치 ${d.major_fields_match}개 · AI 초록 검토 ${d.abstract_reviewed}개`));
   if(d.lookup_failed)box.append(el('p',`외부 조회 실패 ${d.lookup_failed}개: ${Object.entries(d.lookup_errors).map(([k,v])=>`${k} ${v}개`).join(', ')}. 검색 연결 점검으로 원인을 확인하세요.`));
   if(d.unresolved)box.append(el('p',`검색 미해결 ${d.unresolved}개: 검색 범위·추출 표기를 확인해야 합니다. 논문이 없다는 판정이 아닙니다.`));
   if(d.ambiguous_candidates)box.append(el('p',`동일 논문 확정 전인 검색 후보 ${d.ambiguous_candidates}개`));
@@ -69,14 +69,14 @@ function renderReference(r,isOpen){
   const node=el('details',undefined,'reference');node.dataset.id=r.id;node.open=isOpen;
   const summary=el('summary'), main=el('div',undefined,'ref-main');
   main.append(el('div',r.record?.title||r.raw,'ref-title'),el('div',r.record?`${r.record.authors.slice(0,2).join(', ')}${r.record.authors.length>2?' 외':''} · ${r.record.years.join('/')} · ${r.record.journal}`:'등록정보 대조 결과를 확인해 주세요.','ref-meta'));
-  if(r.evidence){const e=r.evidence;const registry={doi_registered:'입력 DOI 등록 확인',search_candidate:'검색 후보 정보 조회',lookup_failed:'등록기관 조회 실패',not_resolved:'등록정보 미해결'};main.append(el('div',`${registry[e.registry]} · 동일 논문 대조: ${e.identity==='major_fields_match'?'주요 3개 정보 일치':'확정 전'} · 내용: ${e.content==='abstract_only'?'초록만 검토':'미검증'}`,'evidence-line'));}
+  if(r.evidence){const e=r.evidence;const registry={doi_registered:'입력 DOI 등록 확인',arxiv_registered:'입력 arXiv ID 등록 확인',search_candidate:'검색 후보 정보 조회',lookup_failed:'등록기관 조회 실패',not_resolved:'등록정보 미해결'};main.append(el('div',`${registry[e.registry]} · 동일 논문 대조: ${e.identity==='major_fields_match'?'주요 3개 정보 일치':'확정 전'} · 내용: ${e.content==='abstract_only'?'초록만 검토':'미검증'}`,'evidence-line'));}
   summary.append(el('span',`[${r.label}]`,'ref-number'),main,el('span',labels[r.status],`badge ${r.status}`));node.append(summary);
   const detail=el('div',undefined,'ref-detail');detail.append(el('h3','PDF에서 추출한 원래 표기'),el('div',r.raw,'raw'));
   for(const flag of r.extraction_flags||[])detail.append(el('p',flag,'issue'));
   for(const issue of r.issues)detail.append(el('p','• '+issue,'issue'));
   if(r.checks.length){detail.append(el('h3','항목별 대조'));for(const check of r.checks){const line=el('div',undefined,'check');line.append(el('strong',check.field),el('span',check.status==='match'?'✓':check.status==='review'?'△':'—','check-mark'),el('span',check.detail));detail.append(line);}}
-  if(r.record){const source=el('a',`${r.record.source || 'Crossref'} 등록 DOI로 원문 확인 ↗`);source.href=r.record.source_url;source.target='_blank';source.rel='noopener noreferrer';detail.append(el('h3','조회 근거'),source,el('p',`매칭 방식: ${r.matched_by==='doi'?'DOI 직접 조회':'서지정보 검색'} · 제목 유사도 ${r.title_similarity}/100 (정확도 확률이 아님)`));
-    detail.append(el('h3','등록정보 기반 표기 제안'),el('div',r.suggested_citation,'citation'),el('p','일반 서지 표기입니다. 투고처의 APA·IEEE 등 세부 양식에 맞게 최종 조정해 주세요.'));
+  if(r.record){const source=el('a',`${r.record.source || 'Crossref'} 원문·등록정보 확인 ↗`);source.href=r.record.source_url;source.target='_blank';source.rel='noopener noreferrer';detail.append(el('h3','조회 근거'),source,el('p',`매칭 방식: ${r.matched_by==='arxiv_id'?'arXiv ID 직접 조회':r.matched_by==='doi'?'DOI 직접 조회':'서지정보 검색'} · 제목 유사도 ${r.title_similarity}/100 (정확도 확률이 아님)`));
+    detail.append(el('h3',r.status==='candidate'?'후보 논문의 서지정보 · 동일 논문 확인 전에는 수정안으로 적용하지 마세요':'등록정보 기반 표기 제안'),el('div',r.suggested_citation,'citation'),el('p','일반 서지 표기입니다. 투고처의 APA·IEEE 등 세부 양식에 맞게 최종 조정해 주세요.'));
   }
   if(r.status==='candidate' && r.candidates?.length){
     detail.append(el('h3','다른 검색 후보 · 동일 논문인지 직접 비교해 주세요'));
