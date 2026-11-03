@@ -1,0 +1,15 @@
+[project]
+name = "reference-verifier"
+version = "0.1.0"
+description = "Evidence-first PDF reference verification"
+requires-python = ">=3.12"
+dependencies = ["fastapi", "uvicorn[standard]", "python-multipart", "pypdf", "httpx", "rapidfuzz"]
+
+[dependency-groups]
+dev = ["pytest", "pytest-asyncio", "reportlab"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["."]
