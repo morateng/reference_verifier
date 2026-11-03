@@ -71,6 +71,12 @@ def extract_text(pages: list[str]) -> dict:
         entry["id"] = i + 1
         doi = DOI_RE.search(entry["raw"])
         entry["doi"] = doi.group().rstrip(".,;") if doi else None
+        distinct_dois = {d.group().rstrip(".,;)").lower() for d in DOI_RE.finditer(entry["raw"])}
+        entry["extraction_flags"] = []
+        if len(distinct_dois) > 1:
+            entry["extraction_flags"].append("서로 다른 DOI가 여러 개 추출됐습니다. 참고문헌 항목이 합쳐졌는지 확인해 주세요.")
+        if len(entry["raw"]) > 3000:
+            entry["extraction_flags"].append("참고문헌 한 항목이 매우 깁니다. 항목 병합이나 페이지 머리말 포함 여부를 확인해 주세요.")
         if entry["doi"]:
             while entry["doi"].endswith(")") and entry["doi"].count(")") > entry["doi"].count("("):
                 entry["doi"] = entry["doi"][:-1]
