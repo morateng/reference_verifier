@@ -8,7 +8,7 @@ from reportlab.pdfgen import canvas
 
 from app.extraction import extract_pdf, extract_text
 from app.main import app, JOBS
-from app.verification import verify_reference, check_content, metadata
+from app.verification import verify_reference, check_content, metadata, rank_candidates
 
 
 WORK = {"DOI": "10.1234/example", "title": ["Deep learning for scientific discovery"],
@@ -86,7 +86,7 @@ async def test_wrong_title_author_year():
 
 async def test_missing_doi_falls_back_without_claiming_match():
     def handler(request):
-        if "/works/" in request.url.path:
+        if "/works/" in request.url.path or "/dois/" in request.url.path:
             return httpx.Response(404)
         return httpx.Response(200, json={"message": {"items": [WORK]}})
     result = await verify(handler)
@@ -171,3 +171,68 @@ def test_result_expiration():
     JOBS["expired"] = {"state": "done", "created_at": 0, "finished_at": 0}
     expire_jobs()
     assert "expired" not in JOBS
+
+
+@pytest.mark.parametrize("authors", ["A. Smith and B. Jones", "Alice Smith, Bob Jones", "Smith A, Jones B"])
+async def test_common_author_styles_are_not_false_mismatches(authors):
+    item = ref(authors + ' (2021). Deep learning for scientific discovery.')
+    result = await verify(lambda r: httpx.Response(200, json={"message": WORK}), item)
+    assert result["status"] == "matched"
+
+
+async def test_author_mentioned_only_in_title_is_not_match():
+    work = {**WORK, "title": ["Smith and Jones methods for scientific discovery"]}
+    item = ref("Unknown, C. (2021). Smith and Jones methods for scientific discovery.")
+    result = await verify(lambda r: httpx.Response(200, json={"message": work}), item)
+    assert result["status"] == "review"
+    assert next(c for c in result["checks"] if c["field"] == "첫 저자")["status"] == "review"
+
+
+async def test_reversed_authors_flag_order():
+    item = ref("B. Jones and A. Smith (2021). Deep learning for scientific discovery.")
+    result = await verify(lambda r: httpx.Response(200, json={"message": WORK}), item)
+    assert result["status"] == "review"
+    assert any("순서" in issue for issue in result["issues"])
+
+
+async def test_diacritic_author_variants():
+    work = {**WORK, "author": [{"family": "García", "given": "José"}]}
+    item = ref("J. Garcia (2021). Deep learning for scientific discovery.")
+    assert (await verify(lambda r: httpx.Response(200, json={"message": work}), item))["status"] == "matched"
+
+
+def test_candidate_ranking_uses_author_and_year_not_just_title():
+    wrong = {**WORK, "DOI": "10.1234/wrong", "author": [{"family": "Brown"}], "published": {"date-parts": [[2010]]}}
+    short = {**WORK, "DOI": "10.1234/short", "title": ["Deep learning"]}
+    assert rank_candidates(ref(), [wrong, short, WORK])[0][1]["DOI"] == WORK["DOI"]
+
+
+def test_duplicate_search_records_not_ambiguous():
+    assert len(rank_candidates(ref(), [WORK, WORK])) == 1
+
+
+async def test_datacite_doi_fallback():
+    def handler(request):
+        if request.url.host == 'api.crossref.org':
+            return httpx.Response(404)
+        return httpx.Response(200, json={"data": {"attributes": {
+            "doi": WORK["DOI"], "titles": [{"title": WORK["title"][0]}], "publicationYear": 2021,
+            "creators": [{"givenName": "Alice", "familyName": "Smith"}, {"givenName": "Bob", "familyName": "Jones"}]
+        }}})
+    result = await verify(handler)
+    assert result["status"] == "matched"
+    assert result["record"]["source"] == "DataCite"
+    assert result["matched_by"] == "doi"
+
+
+async def test_datacite_denied_still_uses_crossref_search():
+    def handler(request):
+        if request.url.host == 'api.datacite.org':
+            return httpx.Response(403)
+        if '/works/' in request.url.path:
+            return httpx.Response(404)
+        return httpx.Response(200, json={"message": {"items": [WORK]}})
+    result = await verify(handler)
+    assert result["record"]["title"] == WORK["title"][0]
+    assert result["status"] == "review"
+    assert any('추가 조회 실패' in issue for issue in result["issues"])

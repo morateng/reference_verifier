@@ -58,8 +58,12 @@ function renderReference(r,isOpen){
   const detail=el('div',undefined,'ref-detail');detail.append(el('h3','PDF에서 추출한 원래 표기'),el('div',r.raw,'raw'));
   for(const issue of r.issues)detail.append(el('p','• '+issue,'issue'));
   if(r.checks.length){detail.append(el('h3','항목별 대조'));for(const check of r.checks){const line=el('div',undefined,'check');line.append(el('strong',check.field),el('span',check.status==='match'?'✓':check.status==='review'?'△':'—','check-mark'),el('span',check.detail));detail.append(line);}}
-  if(r.record){const source=el('a','Crossref 등록 DOI로 원문 확인 ↗');source.href=r.record.source_url;source.target='_blank';source.rel='noopener noreferrer';detail.append(el('h3','조회 근거'),source,el('p',`매칭 방식: ${r.matched_by==='doi'?'DOI 직접 조회':'서지정보 검색'} · 제목 유사도 ${r.title_similarity}/100 (정확도 확률이 아님)`));
+  if(r.record){const source=el('a',`${r.record.source || 'Crossref'} 등록 DOI로 원문 확인 ↗`);source.href=r.record.source_url;source.target='_blank';source.rel='noopener noreferrer';detail.append(el('h3','조회 근거'),source,el('p',`매칭 방식: ${r.matched_by==='doi'?'DOI 직접 조회':'서지정보 검색'} · 제목 유사도 ${r.title_similarity}/100 (정확도 확률이 아님)`));
     detail.append(el('h3','등록정보 기반 표기 제안'),el('div',r.suggested_citation,'citation'),el('p','일반 서지 표기입니다. 투고처의 APA·IEEE 등 세부 양식에 맞게 최종 조정해 주세요.'));
+  }
+  if(r.status==='candidate' && r.candidates?.length){
+    detail.append(el('h3','다른 검색 후보 · 동일 논문인지 직접 비교해 주세요'));
+    for(const candidate of r.candidates){const link=el('a',candidate.title);link.href='https://doi.org/'+encodeURIComponent(candidate.doi);link.target='_blank';link.rel='noopener noreferrer';const line=el('p');line.append(link);detail.append(line);}
   }
   detail.append(el('h3',`본문 인용 문맥 · ${r.contexts.length}곳`));
   if(!r.contexts.length)detail.append(el('p','인용 위치를 자동으로 찾지 못했습니다. 미인용이라고 단정하지 않습니다.'));

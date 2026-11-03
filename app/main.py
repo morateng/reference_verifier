@@ -90,7 +90,7 @@ async def create_job(background: BackgroundTasks, file: UploadFile = File(...), 
         JOBS[job_id] = {"id": job_id, "filename": (file.filename or "paper.pdf")[:200], "created_at": time.time(),
                         "state": "running", "total": len(parsed["references"]), "completed": 0,
                         "page_count": parsed["page_count"], "warnings": parsed["warnings"], "results": [],
-                        "scope": "Crossref 서지정보 대조. 전체 저자의 이니셜·순서, 학술적 타당성, 철회 여부를 완전히 검증하지 않습니다. AI는 초록 기반 예비 검토입니다."}
+                        "scope": "Crossref·DataCite 등록정보 대조. 전체 저자의 이니셜·순서, 학술적 타당성, 철회 여부를 완전히 검증하지 않습니다. AI는 초록 기반 예비 검토입니다."}
         background.add_task(run_job, job_id, parsed, use_ai)
         return {"id": job_id}
     except BaseException:

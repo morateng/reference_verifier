@@ -10,7 +10,75 @@ from rapidfuzz import fuzz
 
 
 def normalize(value: str) -> str:
-    return re.sub(r"[^\w]+", " ", html.unescape(value).casefold()).strip()
+    import unicodedata
+    value = unicodedata.normalize("NFKD", html.unescape(value).casefold())
+    value = "".join(c for c in value if not unicodedata.combining(c))
+    return re.sub(r"[^\w]+", " ", value).strip()
+
+
+def signals(reference: dict, record: dict) -> dict:
+    raw, title = normalize(reference["raw"]), normalize(record["title"])
+    alignment = fuzz.partial_ratio_alignment(title, raw) if title else None
+    score = alignment.score if alignment else 0
+    # Compare authors only inside the author portion, not mentions in the title/journal.
+    boundary = alignment.dest_start if alignment and score >= 70 else len(raw)
+    year = re.search(r"\b(?:19|20)\d{2}\b", raw)
+    if year:
+        boundary = min(boundary, year.start())
+    author_text = raw[:boundary].strip()
+    positions = []
+    missing = []
+    for surname in record["surnames"]:
+        match = re.search(r"(?<!\w)" + re.escape(normalize(surname)) + r"(?!\w)", author_text) if surname else None
+        positions.append(match.start() if match else None)
+        if surname and not match:
+            missing.append(surname)
+    # Accept Smith A, A Smith, Alice Smith. Reject another surname before the first author.
+    first = positions[0] if positions else None
+    given = normalize((record.get("given_names") or [""])[0])
+    prefix = author_text[:first].split() if first is not None else []
+    given_tokens = set(given.split())
+    first_match = first is not None and all(len(t) == 1 or t in given_tokens for t in prefix)
+    present = [p for p in positions if p is not None]
+    return {"title_score": score, "author_match": first_match, "missing": missing,
+            "author_order": present == sorted(present), "year_match": reference.get("year") in record["years"]}
+
+
+def rank_candidates(reference: dict, items: list[dict]) -> list[tuple[float, dict]]:
+    ranked = []
+    seen = set()
+    for work in items:
+        if not work.get("title") or work.get("DOI") in seen:
+            continue
+        seen.add(work.get("DOI"))
+        sig = signals(reference, metadata(work))
+        # Very short titles (e.g. 'Editorial') must not outrank a complete matching title.
+        title = normalize(work["title"][0])
+        specificity = min(1, len(title.split()) / 4)
+        score = .7 * sig["title_score"] * specificity + 20 * sig["author_match"] + 10 * sig["year_match"]
+        ranked.append((score, work))
+    return sorted(ranked, key=lambda row: row[0], reverse=True)
+
+
+def datacite_work(payload: dict) -> dict:
+    data = payload["data"]["attributes"]
+    authors = []
+    for creator in data.get("creators", []):
+        if creator.get("familyName"):
+            authors.append({"family": creator["familyName"], "given": creator.get("givenName", "")})
+        elif creator.get("nameType") == "Organizational":
+            authors.append({"name": creator.get("name", "")})
+        else:
+            name = creator.get("name", "")
+            family, sep, given = name.partition(",")
+            if not sep:
+                given, _, family = name.rpartition(" ")
+            authors.append({"family": family.strip(), "given": given.strip()})
+    year = data.get("publicationYear")
+    return {"DOI": data["doi"], "title": [t["title"] for t in data.get("titles", [])],
+            "author": authors, "published": {"date-parts": [[year]] if year else [[]]},
+            "abstract": next((d.get("description", "") for d in data.get("descriptions", []) if d.get("descriptionType") == "Abstract"), ""),
+            "type": data.get("types", {}).get("resourceTypeGeneral", "unknown"), "_source": "DataCite"}
 
 
 def metadata(work: dict) -> dict:
@@ -22,6 +90,7 @@ def metadata(work: dict) -> dict:
             dates.append(str(parts[0]))
     abstract = re.sub(r"<[^>]+>", " ", work.get("abstract", ""))
     return {"doi": work.get("DOI", ""), "title": (work.get("title") or [""])[0], "authors": authors,
+            "source": work.get("_source", "Crossref"), "given_names": [a.get("given", "") for a in work.get("author", [])],
             "surnames": [a.get("family", a.get("name", "")) for a in work.get("author", [])],
             "years": dates, "journal": (work.get("container-title") or [""])[0],
             "volume": work.get("volume", ""), "issue": work.get("issue", ""), "pages": work.get("page", ""),
@@ -31,12 +100,8 @@ def metadata(work: dict) -> dict:
 
 
 def assess(reference: dict, record: dict, via_doi: bool, ambiguous: bool = False) -> dict:
-    raw = normalize(reference["raw"])
-    title = normalize(record["title"])
-    title_score = fuzz.partial_ratio(title, raw) if title else 0
-    first_author = normalize((record["surnames"] or [""])[0])
-    author_match = bool(first_author) and bool(re.match(re.escape(first_author) + r"(?:\s|$)", raw))
-    year_match = reference.get("year") in record["years"]
+    sig = signals(reference, record)
+    title_score, author_match, year_match = sig["title_score"], sig["author_match"], sig["year_match"]
     issues = []
     checks = []
     checks.append({"field": "제목", "status": "match" if title_score >= 96 else "review", "detail": record["title"]})
@@ -49,11 +114,10 @@ def assess(reference: dict, record: dict, via_doi: bool, ambiguous: bool = False
     if not year_match:
         issues.append("발행연도를 확인해 주세요. 온라인·인쇄 발행연도는 다를 수 있습니다.")
     truncated = bool(re.search(r"et\s+al|\.\s*\.\s*\.|…|외\s*\d*명?", reference["raw"], re.I))
-    missing = [s for s in record["surnames"] if s and not re.search(r"(?<!\w)" + re.escape(normalize(s)) + r"(?!\w)", raw)]
-    positions = [m.start() for s in record["surnames"] if s for m in [re.search(r"(?<!\w)" + re.escape(normalize(s)) + r"(?!\w)", raw)] if m]
-    if not truncated and positions != sorted(positions):
+    missing = sig["missing"]
+    if not truncated and not sig["author_order"]:
         issues.append("저자 성씨가 나열된 순서가 등록정보와 다를 수 있습니다.")
-    checks.append({"field": "전체 저자", "status": "unverified" if truncated else ("review" if missing else "match"),
+    checks.append({"field": "전체 저자", "status": "unverified" if truncated or not record["surnames"] else ("review" if missing or not sig["author_order"] else "match"),
                    "detail": "축약 표기: 전체 저자 대조 필요" if truncated else ("누락·오탈자 후보: " + ", ".join(missing) if missing else "등록된 성씨가 인용에 포함됨; 이니셜·순서는 수동 확인")})
     if missing and not truncated:
         issues.append("일부 저자 성씨가 인용 표기에서 확인되지 않습니다: " + ", ".join(missing))
@@ -107,18 +171,31 @@ async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: b
                 if exc.response.status_code != 404:
                     raise
                 invalid_doi = True
+                try:
+                    payload = await get_json(client, "https://api.datacite.org/dois/" + quote(reference["doi"], safe=""))
+                    work = datacite_work(payload)
+                    via_doi, invalid_doi = True, False
+                except httpx.HTTPStatusError as fallback:
+                    if fallback.response.status_code != 404:
+                        result["issues"].append("DataCite 추가 조회 실패: DOI 확인 범위가 제한되었습니다.")
+                except (httpx.HTTPError, ValueError, KeyError, TypeError):
+                    result["issues"].append("DataCite 추가 조회 실패: DOI 확인 범위가 제한되었습니다.")
         ambiguous = False
         if work is None:
-            payload = await get_json(client, "https://api.crossref.org/works", params={"query.bibliographic": reference["raw"][:1500], "rows": 3})
+            query = re.sub(r"(?:https?://(?:dx\.)?doi\.org/|doi\s*:\s*)?10\.\d{4,9}/\S+", "", reference["raw"], flags=re.I)
+            payload = await get_json(client, "https://api.crossref.org/works", params={"query.bibliographic": query[:1500], "rows": 5})
             items = payload["message"].get("items", [])
-            ranked = sorted(((fuzz.partial_ratio(normalize((w.get("title") or [""])[0]), normalize(reference["raw"])), w) for w in items if w.get("title")), key=lambda v: v[0], reverse=True)
-            if not ranked or ranked[0][0] < 65:
-                result["issues"] = ["Crossref에서 충분히 유사한 후보를 찾지 못했습니다. 미등록 논문·책·학위논문 등일 수 있으며 허위 인용을 뜻하지 않습니다."]
+            ranked = rank_candidates(reference, items)
+            if not ranked or ranked[0][0] < 50:
+                result["issues"].append("Crossref에서 충분히 유사한 후보를 찾지 못했습니다. 미등록 논문·책·학위논문 등일 수 있으며 허위 인용을 뜻하지 않습니다.")
                 return result
             work = ranked[0][1]
-            ambiguous = len(ranked) > 1 and ranked[0][0] - ranked[1][0] < 3 and ranked[0][1].get("DOI") != ranked[1][1].get("DOI")
+            ambiguous = len(ranked) > 1 and ranked[0][0] - ranked[1][0] < 3
+            result["candidates"] = [{"title": metadata(w)["title"], "doi": w.get("DOI", ""), "ranking_score": round(score, 1)} for score, w in ranked]
         record = metadata(work)
-        result.update(assess(reference, record, via_doi, ambiguous))
+        assessed = assess(reference, record, via_doi, ambiguous)
+        assessed["issues"] = result["issues"] + assessed["issues"]
+        result.update(assessed)
         result.update(record=record, suggested_citation=citation(record), matched_by="doi" if via_doi else "bibliographic_search")
         if invalid_doi:
             result["issues"].append("입력 DOI는 Crossref에서 확인되지 않았습니다. 다른 등록기관 DOI일 수도 있습니다. 검색 후보 DOI와 비교해 주세요.")
@@ -134,7 +211,9 @@ async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: b
     except (httpx.HTTPError, ValueError, KeyError, TypeError) as exc:
         result["status"] = "error"
         code = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else None
-        result["issues"] = [f"외부 서지정보 조회에 실패했습니다{f' (HTTP {code})' if code else ''}. 네트워크·서비스 상태를 확인해 다시 시도하세요. 논문의 실재 여부는 판단하지 않았습니다."]
+        reason = {403: "접근이 거부되었습니다. 네트워크 허용 설정을 확인하세요.", 429: "조회 요청 제한에 도달했습니다. 잠시 후 다시 시도하세요.", 500: "외부 서비스에 오류가 발생했습니다."}.get(code, "네트워크·서비스 상태를 확인해 다시 시도하세요.")
+        result["lookup_error"] = {"http_status": code, "kind": "timeout" if isinstance(exc, httpx.TimeoutException) else "lookup_failed"}
+        result["issues"] = [f"외부 서지정보 조회에 실패했습니다{f' (HTTP {code})' if code else ''}. {reason} 논문의 실재 여부는 판단하지 않았습니다."]
         return result
 
 
@@ -144,7 +223,7 @@ async def check_content(reference: dict, record: dict, client: httpx.AsyncClient
         return {"status": "unverified", "reason": "AI API 키가 설정되지 않았습니다."}
     abstract = record["abstract"]
     if not abstract:
-        return {"status": "unverified", "reason": "Crossref에 초록이 없어 내용의 적절성을 판단할 수 없습니다. 원문 검토가 필요합니다."}
+        return {"status": "unverified", "reason": "조회한 등록정보에 초록이 없어 내용의 적절성을 판단할 수 없습니다. 원문 검토가 필요합니다."}
     try:
         # Only retrieved evidence is sent. The model has no tools and must not invent sources.
         response = await client.post("https://api.openai.com/v1/chat/completions", headers={"Authorization": f"Bearer {key}"}, json={
