@@ -2,6 +2,7 @@
 import io
 import re
 from pypdf import PdfReader
+from app.parsing import pdf_lines, layout_references, structured_reference
 
 MAX_REFERENCES = 200
 DOI_RE = re.compile(r"10\.\d{4,9}/[^\s<>\"\]]+", re.I)
@@ -29,10 +30,11 @@ def extract_pdf(data: bytes) -> dict:
         raise ValueError("PDF를 읽을 수 없습니다. 파일이 손상되지 않았는지 확인해 주세요.") from exc
     if sum(len(p.strip()) for p in pages) < 100:
         raise ValueError("추출할 텍스트가 부족합니다. 스캔 PDF는 먼저 OCR 처리가 필요합니다.")
-    return extract_text(pages)
+    layout = layout_references(pdf_lines(reader))
+    return extract_text(pages, layout=layout)
 
 
-def extract_text(pages: list[str]) -> dict:
+def extract_text(pages: list[str], layout: dict | None = None) -> dict:
     text = "\n".join(pages)
     headings = list(HEADING.finditer(text))
     if not headings:
@@ -80,6 +82,8 @@ def extract_text(pages: list[str]) -> dict:
                         "extraction_method": "complete_author_year_header"}
                        for i, m in enumerate(headers)]
             preamble = [combined[:headers[0].start()].strip()] if combined[:headers[0].start()].strip() else []
+    if layout:
+        entries, body, numbered, preamble = layout["entries"], layout["body"], layout["numbered"], []
     if not entries:
         raise ValueError("참고문헌 항목을 구분하지 못했습니다. 현재는 번호형 및 저자–연도형 참고문헌을 지원합니다.")
     if preamble:
@@ -88,6 +92,9 @@ def extract_text(pages: list[str]) -> dict:
         raise ValueError(f"참고문헌 {len(entries)}개를 찾았습니다. 현재 한 번에 최대 {MAX_REFERENCES}개까지 지원합니다.")
     for i, entry in enumerate(entries):
         entry["id"] = i + 1
+        fields = structured_reference(entry["raw"])
+        # Keep original text and geometry separate from normalized fields.
+        entry.update(fields)
         doi = DOI_RE.search(entry["raw"])
         entry["doi"] = doi.group().rstrip(".,;") if doi else None
         distinct_dois = {d.group().rstrip(".,;)").lower() for d in DOI_RE.finditer(entry["raw"])}
@@ -109,10 +116,13 @@ def extract_text(pages: list[str]) -> dict:
     labels = [e["label"] for e in entries]
     if len(labels) != len(set(labels)):
         warnings.append("중복된 참고문헌 번호가 있습니다. PDF 열 순서 또는 항목 분리를 확인해 주세요.")
-    return {"page_count": len(pages), "references": entries, "warnings": warnings}
+    return {"page_count": len(pages), "references": entries, "warnings": warnings,
+            "parsing": layout["summary"] if layout else {"method": "text_fallback", "count": len(entries)},
+            "structured_count": sum(e.get("parse_status") == "structured" for e in entries)}
 
 
 def find_contexts(body: str, entry: dict, numbered: bool) -> list[str]:
+    body = re.sub(r"\s+", " ", body)
     spans = []
     if numbered:
         for m in re.finditer(r"\[([\d\s,;–−-]+)\]", body):

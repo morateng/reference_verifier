@@ -1,7 +1,7 @@
 """Expose evidence and failure causes without changing matching thresholds."""
 from collections import Counter
 
-VERSION = "0.3.0-reference-boundaries"
+VERSION = "0.4.0-layout-parser"
 
 
 def evidence(result: dict) -> dict:

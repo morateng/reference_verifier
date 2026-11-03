@@ -79,6 +79,27 @@ def expire_jobs():
             del JOBS[key]
 
 
+async def parse_upload(file: UploadFile) -> dict:
+    data = await file.read(MAX_BYTES + 1)
+    if len(data) > MAX_BYTES:
+        raise HTTPException(413, "PDF는 최대 20MB까지 업로드할 수 있습니다.")
+    if not data.startswith(b"%PDF-"):
+        raise HTTPException(400, "올바른 PDF 파일을 업로드해 주세요.")
+    try:
+        return await asyncio.to_thread(extract_pdf, data)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.post("/api/parse")
+async def preview_parsing(file: UploadFile = File(...)):
+    """Preview local parsing only; no registry or AI requests and no stored job."""
+    try:
+        return {"version": VERSION, **await parse_upload(file)}
+    finally:
+        await file.close()
+
+
 async def run_job(job_id: str, parsed: dict, use_ai: bool):
     global ACTIVE
     job = JOBS[job_id]
@@ -107,19 +128,12 @@ async def create_job(background: BackgroundTasks, file: UploadFile = File(...), 
         raise HTTPException(429, "현재 처리 가능한 작업 수를 초과했습니다. 잠시 후 다시 시도해 주세요.")
     ACTIVE += 1
     try:
-        data = await file.read(MAX_BYTES + 1)
-        if len(data) > MAX_BYTES:
-            raise HTTPException(413, "PDF는 최대 20MB까지 업로드할 수 있습니다.")
-        if not data.startswith(b"%PDF-"):
-            raise HTTPException(400, "올바른 PDF 파일을 업로드해 주세요.")
-        try:
-            parsed = await asyncio.to_thread(extract_pdf, data)
-        except ValueError as exc:
-            raise HTTPException(422, str(exc)) from exc
+        parsed = await parse_upload(file)
         job_id = uuid.uuid4().hex
         JOBS[job_id] = {"id": job_id, "version": VERSION, "filename": (file.filename or "paper.pdf")[:200], "created_at": time.time(),
                         "state": "running", "total": len(parsed["references"]), "completed": 0,
                         "page_count": parsed["page_count"], "warnings": parsed["warnings"], "results": [],
+                        "parsing": parsed.get("parsing"), "structured_count": parsed.get("structured_count", 0),
                         "scope": "Crossref·DataCite·arXiv 등록정보 대조. 전체 저자의 이니셜·순서, 학술적 타당성, 철회 여부를 완전히 검증하지 않습니다. AI는 초록 기반 예비 검토입니다."}
         background.add_task(run_job, job_id, parsed, use_ai)
         return {"id": job_id}

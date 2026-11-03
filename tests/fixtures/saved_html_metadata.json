@@ -1,0 +1,107 @@
+{
+  "provenance": "Metadata transcribed from registered title, authors, year and DOI displayed in the user-provided saved HTML. Not a new live registry lookup.",
+  "works": [
+    {
+      "DOI": "10.18653/v1/2024.acl-long.673",
+      "title": [
+        "VoiceCraft: Zero-Shot Speech Editing and Text-to-Speech in the Wild"
+      ],
+      "author": [
+        {
+          "given": "Puyuan",
+          "family": "Peng"
+        },
+        {
+          "given": "Po-Yao",
+          "family": "Huang"
+        },
+        {
+          "given": "Shang-Wen",
+          "family": "Li"
+        },
+        {
+          "given": "Abdelrahman",
+          "family": "Mohamed"
+        },
+        {
+          "given": "David",
+          "family": "Harwath"
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024
+          ]
+        ]
+      }
+    },
+    {
+      "DOI": "10.1109/taslpro.2025.3530270",
+      "title": [
+        "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers"
+      ],
+      "author": [
+        {
+          "given": "Sanyuan",
+          "family": "Chen"
+        },
+        {
+          "given": "Chengyi",
+          "family": "Wang"
+        },
+        {
+          "given": "Yu",
+          "family": "Wu"
+        },
+        {
+          "given": "Ziqiang",
+          "family": "Zhang"
+        },
+        {
+          "given": "Long",
+          "family": "Zhou"
+        },
+        {
+          "given": "Shujie",
+          "family": "Liu"
+        },
+        {
+          "given": "Zhuo",
+          "family": "Chen"
+        },
+        {
+          "given": "Yanqing",
+          "family": "Liu"
+        },
+        {
+          "given": "Huaming",
+          "family": "Wang"
+        },
+        {
+          "given": "Jinyu",
+          "family": "Li"
+        },
+        {
+          "given": "Lei",
+          "family": "He"
+        },
+        {
+          "given": "Sheng",
+          "family": "Zhao"
+        },
+        {
+          "given": "Furu",
+          "family": "Wei"
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025
+          ]
+        ]
+      }
+    }
+  ]
+}

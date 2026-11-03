@@ -1,0 +1,2594 @@
+[
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 760.065,
+    "text": "References",
+    "size": 11.9552,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 741.71,
+    "text": "Philip Anastassiou, Jiawei Chen, Jitong Chen, Yuanzhe",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 730.751,
+    "text": "Chen, Zhuo Chen, Ziyi Chen, Jian Cong, Lelai Deng,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 719.792,
+    "text": "Chuang Ding, Lu Gao, Mingqing Gong, Peisong",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 708.833,
+    "text": "Huang, Qingqing Huang, Zhiying Huang, Yuanyuan",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 697.874,
+    "text": "Huo, Dongya Jia, Chumin Li, Feiya Li, Hui Li,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 686.915,
+    "text": "and 27 others. 2024. Seed-tts: A family of high-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 675.956,
+    "text": "quality versatile speech generation models.Preprint,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 664.997,
+    "text": "arXiv:2406.02430.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 643.929,
+    "text": "Tim Brooks, Aleksander Holynski, and Alexei A. Efros.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 632.97,
+    "text": "2023. Instructpix2pix: Learning to follow image edit-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 622.011,
+    "text": "ing instructions. InProceedings of the IEEE/CVF",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.446,
+    "y": 611.053,
+    "text": "Conference on Computer Vision and Pattern Recog-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 600.094,
+    "text": "nition (CVPR), pages 18392–18402.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 579.026,
+    "text": "Yuewen Cao, Songxiang Liu, Xixin Wu, Shiyin Kang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 568.067,
+    "text": "Peng Liu, Zhiyong Wu, Xunying Liu, Dan Su, Dong",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.197,
+    "y": 557.108,
+    "text": "Yu, and Helen Meng. 2020. Code-switched speech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 546.149,
+    "text": "synthesis using bilingual phonetic posteriorgram with",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 535.19,
+    "text": "only monolingual corpora. InICASSP 2020 - 2020",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.606,
+    "y": 524.231,
+    "text": "IEEE International Conference on Acoustics, Speech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 513.272,
+    "text": "and Signal Processing (ICASSP), pages 7619–7623.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 492.204,
+    "text": "Edresson Casanova, Kelly Davis, Eren Gölge, Görkem",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 481.245,
+    "text": "Göknar, Iulian Gulea, Logan Hart, Aya Aljafari,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.586,
+    "y": 470.286,
+    "text": "Joshua Meyer, Reuben Morais, Samuel Olayemi, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.586,
+    "y": 459.327,
+    "text": "Julian Weber. 2024. XTTS: a Massively Multilingual",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 448.369,
+    "text": "Zero-Shot Text-to-Speech Model. InInterspeech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.526,
+    "y": 437.41,
+    "text": "2024, pages 4978–4982.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 416.342,
+    "text": "Ke Chen, Zhihua Huang, Liang He, and Yonghong Yan.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 405.383,
+    "text": "2025a. Unitdiff: A unit-diffusion model for code-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 394.424,
+    "text": "switching speech synthesis.IEEE Signal Processing",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.496,
+    "y": 383.465,
+    "text": "Letters, 32:1051–1055.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 362.397,
+    "text": "Ke Chen, Zhihua Huang, Liang He, and Yonghong Yan.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 351.438,
+    "text": "2025b. Zcs-cdiff: A zero-shot code-switching tts",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 340.479,
+    "text": "system with conformer-based diffusion model. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.606,
+    "y": 329.52,
+    "text": "ICASSP 2025 - 2025 IEEE International Confer-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 318.561,
+    "text": "ence on Acoustics, Speech and Signal Processing",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.108,
+    "y": 307.602,
+    "text": "(ICASSP), pages 1–5.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 286.534,
+    "text": "Ke Chen, Zhihua Huang, Kexin Lu, and Yonghong Yan.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 275.575,
+    "text": "2024. Cosdiff: Code-switching tts model based on a",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 264.616,
+    "text": "multi-task ddim. In2024 IEEE International Confer-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 253.658,
+    "text": "ence on Multimedia and Expo (ICME), pages 1–6.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 232.589,
+    "text": "Sanyuan Chen, Chengyi Wang, Zhengyang Chen,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.197,
+    "y": 221.631,
+    "text": "Yu Wu, Shujie Liu, Zhuo Chen, Jinyu Li, Naoyuki",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 210.672,
+    "text": "Kanda, Takuya Yoshioka, Xiong Xiao, Jian Wu, Long",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 199.713,
+    "text": "Zhou, Shuo Ren, Yanmin Qian, Yao Qian, Jian Wu,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 188.754,
+    "text": "Michael Zeng, Xiangzhan Yu, and Furu Wei. 2022.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.307,
+    "y": 177.795,
+    "text": "Wavlm: Large-scale self-supervised pre-training for",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 166.836,
+    "text": "full stack speech processing.IEEE J. Sel. Top. Signal",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.466,
+    "y": 155.877,
+    "text": "Process., 16(6):1505–1518.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 70.866,
+    "y": 134.809,
+    "text": "Sanyuan Chen, Chengyi Wang, Yu Wu, Ziqiang Zhang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 123.85,
+    "text": "Long Zhou, Shujie Liu, Zhuo Chen, Yanqing Liu,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 112.891,
+    "text": "Huaming Wang, Jinyu Li, Lei He, Sheng Zhao, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 101.932,
+    "text": "Furu Wei. 2025c. Neural codec language models are",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 90.974,
+    "text": "zero-shot text to speech synthesizers.IEEE Trans-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 80.015,
+    "text": "actions on Audio, Speech and Language Processing,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 81.775,
+    "y": 69.056,
+    "text": "33:705–718.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 760.065,
+    "text": "Hyunjae Cho, Wonbin Jung, Junhyeok Lee, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 749.106,
+    "text": "Sang Hoon Woo. 2022. SANE-TTS: Stable And",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 738.147,
+    "text": "Natural End-to-End Multilingual Text-to-Speech. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.882,
+    "y": 727.188,
+    "text": "Interspeech 2022, pages 1–5.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 708.498,
+    "text": "Zhihao Du, Yuxuan Wang, Qian Chen, Xian Shi, Xiang",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 697.539,
+    "text": "Lv, Tianyu Zhao, Zhifu Gao, Yexin Yang, Changfeng",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 686.58,
+    "text": "Gao, Hui Wang, and 1 others. 2024. Cosyvoice 2:",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 675.621,
+    "text": "Scalable streaming speech synthesis with large lan-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 664.662,
+    "text": "guage models.arXiv preprint arXiv:2412.10117.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 645.973,
+    "text": "Xiaoyu Fan, Huizhi Xie, Wei Zou, and Yunzhang Chen.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 635.014,
+    "text": "2026. Llada-tts: Unifying speech synthesis and zero-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 624.055,
+    "text": "shot editing via masked diffusion modeling.Preprint,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 613.096,
+    "text": "arXiv:2603.26364.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 594.406,
+    "text": "Yitian Gong, Botian Jiang, Yiwei Zhao, Yucheng Yuan,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 583.447,
+    "text": "Kuangwei Chen, Yaozhou Jiang, Cheng Chang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 572.488,
+    "text": "Dong Hong, Mingshu Chen, Ruixiao Li, Yiyang",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 561.529,
+    "text": "Zhang, Yang Gao, Hanfu Chen, Ke Chen, Songlin",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.583,
+    "y": 550.57,
+    "text": "Wang, Xiaogui Yang, Yuqian Zhang, Kexin Huang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 539.611,
+    "text": "ZhengYuan Lin, and 7 others. 2026. Moss-tts techni-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 528.652,
+    "text": "cal report.Preprint, arXiv:2603.18090.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 509.962,
+    "text": "Jonathan Ho and Tim Salimans. 2021. Classifier-free",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 499.004,
+    "text": "diffusion guidance. InNeurIPS 2021 Workshop on",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.692,
+    "y": 488.045,
+    "text": "Deep Generative Models and Downstream Applica-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 477.086,
+    "text": "tions.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 458.396,
+    "text": "Keith Ito and Linda Johnson. 2017. The lj",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 447.437,
+    "text": "speech dataset. https://keithito.com/",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 436.478,
+    "text": "LJ-Speech-Dataset/.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 417.788,
+    "text": "Zeqian Ju, Yuancheng Wang, Kai Shen, Xu Tan, De-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 406.829,
+    "text": "tai Xin, Dongchao Yang, Eric Liu, Yichong Leng,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 395.87,
+    "text": "Kaitao Song, Siliang Tang, Zhizheng Wu, Tao Qin,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.692,
+    "y": 384.911,
+    "text": "Xiangyang Li, Wei Ye, Shikun Zhang, Jiang Bian, Lei",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 373.952,
+    "text": "He, Jinyu Li, and sheng zhao. 2024. Naturalspeech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 362.994,
+    "text": "3: Zero-shot speech synthesis with factorized codec",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 352.035,
+    "text": "and diffusion models. InForty-first International",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.722,
+    "y": 341.076,
+    "text": "Conference on Machine Learning.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 322.386,
+    "text": "Changhwan Kim. 2024. ClariTTS: Feature-ratio Nor-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 311.427,
+    "text": "malization and Duration Stabilization for Code-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 300.468,
+    "text": "mixed Multi-speaker Speech Synthesis. InInter-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 289.509,
+    "text": "speech 2024, pages 3400–3404.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 270.819,
+    "text": "Jaehyeon Kim, Sungwon Kim, Jungil Kong, and Sun-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 259.86,
+    "text": "groh Yoon. 2020. Glow-tts: A generative flow for",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 248.901,
+    "text": "text-to-speech via monotonic alignment search. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.443,
+    "y": 237.942,
+    "text": "Advances in Neural Information Processing Systems,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.802,
+    "y": 226.984,
+    "text": "volume 33, pages 8067–8077. Curran Associates, Inc.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 208.294,
+    "text": "Jaehyeon Kim, Jungil Kong, and Juhee Son. 2021.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 197.335,
+    "text": "Conditional variational autoencoder with adversarial",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 186.376,
+    "text": "learning for end-to-end text-to-speech. InProceed-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 175.417,
+    "text": "ings of the 38th International Conference on Machine",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.772,
+    "y": 164.458,
+    "text": "Learning, volume 139 ofProceedings of Machine",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.772,
+    "y": 153.499,
+    "text": "Learning Research, pages 5530–5540. PMLR.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 306.142,
+    "y": 134.809,
+    "text": "Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 123.85,
+    "text": "Kentaro Inui. 2020. Attention is not only a weight:",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.692,
+    "y": 112.891,
+    "text": "Analyzing transformers with vector norms. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.742,
+    "y": 101.932,
+    "text": "Proceedings of the 2020 Conference on Empirical",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 316.633,
+    "y": 90.974,
+    "text": "Methods in Natural Language Processing (EMNLP),",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 80.015,
+    "text": "pages 7057–7075, Online. Association for Computa-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 10,
+    "x": 317.051,
+    "y": 69.056,
+    "text": "tional Linguistics.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 760.065,
+    "text": "Matthew Le, Apoorv Vyas, Bowen Shi, Brian Karrer,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 749.106,
+    "text": "Leda Sari, Rashel Moritz, Mary Williamson, Vimal",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 738.147,
+    "text": "Manohar, Yossi Adi, Jay Mahadeokar, and Wei-Ning",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 727.188,
+    "text": "Hsu. 2023. V oicebox: Text-guided multilingual uni-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.526,
+    "y": 716.229,
+    "text": "versal speech generation at scale. InThirty-seventh",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.446,
+    "y": 705.27,
+    "text": "Conference on Neural Information Processing Sys-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 694.311,
+    "text": "tems.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 672.327,
+    "text": "Haohe Liu, Zehua Chen, Yi Yuan, Xinhao Mei, Xubo",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 661.368,
+    "text": "Liu, Danilo Mandic, Wenwu Wang, and Mark D",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 650.409,
+    "text": "Plumbley. 2023. AudioLDM: Text-to-audio genera-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 639.45,
+    "text": "tion with latent diffusion models. InProceedings of",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 628.491,
+    "text": "the 40th International Conference on Machine Learn-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 617.533,
+    "text": "ing, volume 202 ofProceedings of Machine Learning",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.466,
+    "y": 606.574,
+    "text": "Research, pages 21450–21474. PMLR.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 584.589,
+    "text": "Nan Liu, Shuang Li, Yilun Du, Antonio Torralba, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.586,
+    "y": 573.63,
+    "text": "Joshua B Tenenbaum. 2022. Compositional visual",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 562.672,
+    "text": "generation with composable diffusion models. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.446,
+    "y": 551.713,
+    "text": "Computer Vision–ECCV 2022: 17th European Con-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 540.754,
+    "text": "ference, Tel Aviv, Israel, October 23–27, 2022, Pro-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 529.795,
+    "text": "ceedings, Part XVII, pages 423–439. Springer.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 507.811,
+    "text": "Dau-Cheng Lyu, Tien-Ping Tan, Eng Siong Chng, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 496.852,
+    "text": "Haizhou Li. 2010. SEAME: a Mandarin-English",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 485.893,
+    "text": "code-switching speech corpus in south-east asia. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.606,
+    "y": 474.934,
+    "text": "Interspeech 2010, pages 1986–1989.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 452.95,
+    "text": "Michael McAuliffe, Michaela Socolof, Sarah Mihuc,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 441.991,
+    "text": "Michael Wagner, and Morgan Sonderegger. 2017.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 431.032,
+    "text": "Montreal Forced Aligner: Trainable Text-Speech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.417,
+    "y": 420.073,
+    "text": "Alignment Using Kaldi. InInterspeech 2017, pages",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.427,
+    "y": 409.114,
+    "text": "498–502.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 387.13,
+    "text": "Carol Myers-Scotton. 1993.Duelling Languages:",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.417,
+    "y": 376.171,
+    "text": "Grammatical Structure in Codeswitching. Oxford",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 365.212,
+    "text": "University Press.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 343.228,
+    "text": "Frederico S. Oliveira, Edresson Casanova, Arnaldo Can-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 332.269,
+    "text": "dido Junior, Anderson S. Soares, and Arlindo R.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 321.31,
+    "text": "Galvão Filho. 2023. Cml-tts: A multilingual dataset",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 310.351,
+    "text": "for speech synthesis in low-resource languages. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.217,
+    "y": 299.392,
+    "text": "Text, Speech, and Dialogue, pages 188–199, Cham.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 288.433,
+    "text": "Springer Nature Switzerland.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 266.449,
+    "text": "Gio Paik, Yongbeom Kim, Soungmin Lee, Sangmin",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.417,
+    "y": 255.49,
+    "text": "Ahn, and Chan Woo Kim. 2026. HiKE: Hierarchi-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 244.531,
+    "text": "cal evaluation framework for Korean-English code-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 233.572,
+    "text": "switching speech recognition. InFindings of the",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.168,
+    "y": 222.613,
+    "text": "Association for Computational Linguistics: EACL",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.526,
+    "y": 211.654,
+    "text": "2026, pages 673–681, Rabat, Morocco. Association",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 200.695,
+    "text": "for Computational Linguistics.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 178.711,
+    "text": "Giridhar Pamisetty and Atul Shree. 2026. Ipacue-tts:",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 167.752,
+    "text": "Integrating prosody and articulatory cues in condi-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 156.793,
+    "text": "tional flow matching for multilingual zero-shot tts.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 145.834,
+    "text": "InICASSP 2026 - 2026 IEEE International Confer-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 134.876,
+    "text": "ence on Acoustics, Speech and Signal Processing",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.108,
+    "y": 123.917,
+    "text": "(ICASSP), pages 18642–18646.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 70.866,
+    "y": 101.932,
+    "text": "Kyubyong Park. 2018. KSS Dataset: Korean",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.775,
+    "y": 90.974,
+    "text": "Single Speaker Speech Dataset. https:",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.27700000000002,
+    "y": 80.015,
+    "text": "//www.kaggle.com/datasets/bryanpark/",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 81.77500000000002,
+    "y": 69.056,
+    "text": "korean-single-speaker-speech-dataset.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 760.065,
+    "text": "Kyubyong Park and Thomas Mulc. 2019. CSS10: A",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 749.106,
+    "text": "Collection of Single Speaker Speech Datasets for 10",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 738.147,
+    "text": "Languages. InInterspeech 2019, pages 1566–1570.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 717.38,
+    "text": "Puyuan Peng, Po-Yao Huang, Shang-Wen Li, Abdelrah-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 706.421,
+    "text": "man Mohamed, and David Harwath. 2024. V oice-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 695.462,
+    "text": "Craft: Zero-shot speech editing and text-to-speech in",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 684.504,
+    "text": "the wild. InProceedings of the 62nd Annual Meeting",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 673.545,
+    "text": "of the Association for Computational Linguistics (Vol-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 662.586,
+    "text": "ume 1: Long Papers), pages 12442–12462, Bangkok,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.742,
+    "y": 651.627,
+    "text": "Thailand. Association for Computational Linguistics.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 630.86,
+    "text": "Chunyu Qiang, Jianhua Tao, Ruibo Fu, Zhengqi Wen,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.862,
+    "y": 619.901,
+    "text": "Jiangyan Yi, Tao Wang, and Shiming Wang. 2021.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.742,
+    "y": 608.942,
+    "text": "Text enhancement for paragraph processing in end-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 597.984,
+    "text": "to-end code-switching tts. In2021 12th International",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.802,
+    "y": 587.025,
+    "text": "Symposium on Chinese Spoken Language Processing",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.383,
+    "y": 576.066,
+    "text": "(ISCSLP), pages 1–5.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 555.299,
+    "text": "Alec Radford, Jong Wook Kim, Tao Xu, Greg Brock-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 544.34,
+    "text": "man, Christine Mcleavey, and Ilya Sutskever. 2023.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 533.381,
+    "text": "Robust speech recognition via large-scale weak su-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 522.422,
+    "text": "pervision. InProceedings of the 40th International",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.722,
+    "y": 511.464,
+    "text": "Conference on Machine Learning, volume 202 of",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.742,
+    "y": 500.505,
+    "text": "Proceedings of Machine Learning Research, pages",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 489.546,
+    "text": "28492–28518. PMLR.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 468.779,
+    "text": "Takaaki Saeki, Detai Xin, Wataru Nakata, Tomoki",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 457.82,
+    "text": "Koriyama, Shinnosuke Takamichi, and Hiroshi",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 446.861,
+    "text": "Saruwatari. 2022. UTMOS: UTokyo-SaruLab Sys-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 435.902,
+    "text": "tem for V oiceMOS Challenge 2022. InInterspeech",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.802,
+    "y": 424.944,
+    "text": "2022, pages 4521–4525.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 404.177,
+    "text": "Guillaume Sanchez, Honglu Fan, Alexander Spangher,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 393.218,
+    "text": "Elad Levi, Pawan Sasanka Ammanamanchi, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 382.259,
+    "text": "Stella Biderman. 2023. Stay on topic with classifier-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 371.3,
+    "text": "free guidance.Preprint, arXiv:2306.17806.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 350.534,
+    "text": "Dazhong Shen, Guanglu Song, Zeyue Xue, Fu-Yun",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.583,
+    "y": 339.575,
+    "text": "Wang, and Yu Liu. 2024. Rethinking the Spatial",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 328.616,
+    "text": "Inconsistency in Classifier-Free Diffusion Guidance .",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 317.657,
+    "text": "In2024 IEEE/CVF Conference on Computer Vision",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 306.698,
+    "text": "and Pattern Recognition (CVPR), pages 9370–9379,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 295.739,
+    "text": "Los Alamitos, CA, USA. IEEE Computer Society.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 274.972,
+    "text": "Jonathan Shen, Ruoming Pang, Ron J. Weiss, Mike",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 264.014,
+    "text": "Schuster, Navdeep Jaitly, Zongheng Yang, Zhifeng",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 253.055,
+    "text": "Chen, Yu Zhang, Yuxuan Wang, Rj Skerrv-Ryan,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 242.096,
+    "text": "Rif A. Saurous, Yannis Agiomvrgiannakis, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.473,
+    "y": 231.137,
+    "text": "Yonghui Wu. 2018. Natural tts synthesis by con-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 220.178,
+    "text": "ditioning wavenet on mel spectrogram predictions.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 209.219,
+    "text": "In2018 IEEE International Conference on Acous-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 198.26,
+    "text": "tics, Speech and Signal Processing (ICASSP), pages",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.702,
+    "y": 187.301,
+    "text": "4779–4783.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 166.535,
+    "text": "Xian Shi, Xiong Wang, Zhifang Guo, Yongqi Wang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 155.576,
+    "text": "Pei Zhang, Xinyu Zhang, Zishan Guo, Hongkun Hao,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.473,
+    "y": 144.617,
+    "text": "Yu Xi, Baosong Yang, Jin Xu, Jingren Zhou, and Jun-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.802,
+    "y": 133.658,
+    "text": "yang Lin. 2026. Qwen3-asr technical report.arXiv",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 122.699,
+    "text": "preprint arXiv:2601.21337.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 306.142,
+    "y": 101.932,
+    "text": "Sunayana Sitaram, Khyathi Raghavi Chandu, Sai Kr-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 90.974,
+    "text": "ishna Rallabandi, and Alan W Black. 2020. A survey",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 317.051,
+    "y": 80.015,
+    "text": "of code-switched speech and language processing.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 11,
+    "x": 316.742,
+    "y": 69.056,
+    "text": "Preprint, arXiv:1904.00784.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 760.065,
+    "text": "Enes Yavuz Ugan, Ngoc-Quan Pham, Leonard Bärmann,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 749.106,
+    "text": "and Alex Waibel. 2025. Pier: A novel metric for eval-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 738.147,
+    "text": "uating what matters in code-switching. InICASSP",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.526,
+    "y": 727.188,
+    "text": "2025-2025 IEEE International Conference on Acous-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 716.229,
+    "text": "tics, Speech and Signal Processing (ICASSP), pages",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.028,
+    "y": 705.27,
+    "text": "1–5. IEEE.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 685.721,
+    "text": "Yuancheng Wang, Haoyue Zhan, Liwei Liu, Ruihong",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 674.762,
+    "text": "Zeng, Haotian Guo, Jiachen Zheng, Qiang Zhang,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.417,
+    "y": 663.803,
+    "text": "Xueyao Zhang, Shunsi Zhang, and Zhizheng Wu.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 652.845,
+    "text": "2025. MaskGCT: Zero-shot text-to-speech with",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 641.886,
+    "text": "masked generative codec transformer. InThe Thir-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 630.927,
+    "text": "teenth International Conference on Learning Repre-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 619.968,
+    "text": "sentations.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 600.419,
+    "text": "Yuxuan Wang, R.J. Skerry-Ryan, Daisy Stanton,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.197,
+    "y": 589.46,
+    "text": "Yonghui Wu, Ron J. Weiss, Navdeep Jaitly, Zongheng",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.197,
+    "y": 578.501,
+    "text": "Yang, Ying Xiao, Zhifeng Chen, Samy Bengio, Quoc",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 567.542,
+    "text": "Le, Yannis Agiomyrgiannakis, Rob Clark, and Rif A.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 556.583,
+    "text": "Saurous. 2017. Tacotron: Towards End-to-End",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 545.624,
+    "text": "Speech Synthesis. InInterspeech 2017, pages 4006–",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.427,
+    "y": 534.665,
+    "text": "4010.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 515.117,
+    "text": "Peng Xie, Xingyuan Liu, Yequan Bie, Tsz Wai Chan,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.197,
+    "y": 504.158,
+    "text": "Yangqiu Song, Yang Wang, Hao Chen, and Kani",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 493.199,
+    "text": "Chen. 2026. Switchlingua: The first large-scale mul-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 482.24,
+    "text": "tilingual and multi-ethnic code-switching dataset. In",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.217,
+    "y": 471.281,
+    "text": "The Thirty-ninth Annual Conference on Neural In-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 460.322,
+    "text": "formation Processing Systems Datasets and Bench-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 449.363,
+    "text": "marks Track.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 429.814,
+    "text": "Jing Xu, Daxin Tan, Jiaqi Wang, and Xiao Chen. 2024.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 418.855,
+    "text": "Enhancing code-switched text-to-speech synthesis",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 407.896,
+    "text": "capability in large language models with only mono-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 396.937,
+    "text": "lingual corpora.2025 IEEE Automatic Speech Recog-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 385.979,
+    "text": "nition and Understanding Workshop (ASRU), pages",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.028,
+    "y": 375.02,
+    "text": "1–8.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 355.471,
+    "text": "Rixi Xu, Qingyu Liu, Haitao Li, Yushen Chen, Zhikang",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 344.512,
+    "text": "Niu, Yunting Yang, Jian Zhao, Ke Li, Berrak Sis-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 333.553,
+    "text": "man, Qinyuan Cheng, Xipeng Qiu, Kai Yu, and Xie",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 322.594,
+    "text": "Chen. 2026. X-voice: Enabling everyone to speak 30",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 311.635,
+    "text": "languages via zero-shot cross-lingual voice cloning.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 300.676,
+    "text": "arXiv preprint arXiv:2605.05611.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 281.127,
+    "text": "Huai-Zhe Yang, Chia-Ping Chen, Shan-Yun He, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 270.168,
+    "text": "Cheng-Ruei Li. 2024. Bilingual and Code-switching",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.466,
+    "y": 259.209,
+    "text": "TTS Enhanced with Denoising Diffusion Model and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 248.25,
+    "text": "GAN. InInterspeech 2024, pages 4938–4942.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 228.702,
+    "text": "Lvmin Zhang, Anyi Rao, and Maneesh Agrawala.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 217.743,
+    "text": "2023a. Adding conditional control to text-to-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 206.784,
+    "text": "image diffusion models. InProceedings of the",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.606,
+    "y": 195.825,
+    "text": "IEEE/CVF International Conference on Computer",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.168,
+    "y": 184.866,
+    "text": "Vision (ICCV), pages 3836–3847.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 165.317,
+    "text": "Ziqiang Zhang, Long Zhou, Chengyi Wang, Sanyuan",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 154.358,
+    "text": "Chen, Yu Wu, Shujie Liu, Zhuo Chen, Yanqing Liu,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 143.399,
+    "text": "Huaming Wang, Jinyu Li, Lei He, Sheng Zhao, and",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 132.44,
+    "text": "Furu Wei. 2023b. Speak foreign languages with your",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 121.481,
+    "text": "own voice: Cross-lingual neural codec language mod-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 110.522,
+    "text": "eling. arXiv.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 70.866,
+    "y": 90.974,
+    "text": "John Zheng and Farhad Maleki. 2026. Selective",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.775,
+    "y": 80.015,
+    "text": "classifier-free guidance for zero-shot text-to-speech.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 81.466,
+    "y": 69.056,
+    "text": "Preprint, arXiv:2509.19668.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 0
+  },
+  {
+    "page": 12,
+    "x": 306.142,
+    "y": 760.065,
+    "text": "Han Zhu, Lingxuan Ye, Wei Kang, Zengwei Yao,",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 317.051,
+    "y": 749.106,
+    "text": "Liyong Guo, Fangjun Kuang, Zhifeng Han, Weiji",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 317.051,
+    "y": 738.147,
+    "text": "Zhuang, Long Lin, and Daniel Povey. 2026. Om-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 317.051,
+    "y": 727.188,
+    "text": "nivoice: Towards omnilingual zero-shot text-to-",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 317.051,
+    "y": 716.229,
+    "text": "speech with diffusion language models.arXiv",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 12,
+    "x": 317.051,
+    "y": 705.27,
+    "text": "preprint arXiv:2604.00688.",
+    "size": 9.9626,
+    "width": 595,
+    "column": 1
+  },
+  {
+    "page": 13,
+    "x": 70.866,
+    "y": 760.065,
+    "text": "A Additional Details on Human",
+    "size": 11.9552,
+    "width": 595,
+    "column": 0
+  }
+]

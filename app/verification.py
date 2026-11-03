@@ -23,10 +23,28 @@ def normalize(value: str) -> str:
     return re.sub(r"[^\w]+", " ", value).strip()
 
 
+def name_matches(cited: str, surname: str, given: str) -> bool:
+    text, family = normalize(cited), normalize(surname)
+    if not family:
+        return False
+    found = re.search(r"(?<!\w)" + re.escape(family) + r"(?!\w)", text)
+    if not found:
+        return False
+    actual = (text[:found.start()] + " " + text[found.end():]).strip().split()
+    expected = normalize(given).split()
+    if not expected or not actual:
+        return True  # No given-name evidence; surname matching only.
+    if len(actual) == 1 and len(actual[0]) > 1 and actual[0] == "".join(t[0] for t in expected):
+        return True
+    if len(actual) > len(expected):
+        return False
+    return all(a == b or ((len(a) == 1 or len(b) == 1) and a[0] == b[0]) for a, b in zip(actual, expected))
+
+
 def signals(reference: dict, record: dict) -> dict:
     raw, title = normalize(reference["raw"]), normalize(record["title"])
     alignment = fuzz.partial_ratio_alignment(title, raw) if title else None
-    score = alignment.score if alignment else 0
+    score = fuzz.ratio(normalize(reference["title"]), title) if reference.get("parse_status") == "structured" and reference.get("title") else alignment.score if alignment else 0
     # Compare authors only inside the author portion, not mentions in the title/journal.
     boundary = alignment.dest_start if alignment and score >= 70 else len(raw)
     year = re.search(r"\b(?:19|20)\d{2}\b", raw)
@@ -47,8 +65,29 @@ def signals(reference: dict, record: dict) -> dict:
     given_tokens = set(given.split())
     first_match = first is not None and all(len(t) == 1 or t in given_tokens for t in prefix)
     present = [p for p in positions if p is not None]
+    order = present == sorted(present)
+    insufficient = False
+    unmatched_visible = []
+    cited_names = reference.get("parsed_authors")
+    if cited_names:
+        canonical = list(zip(record["surnames"], record["given_names"]))
+        first_match = bool(canonical) and name_matches(cited_names[0], *canonical[0])
+        used, matched_positions = set(), []
+        for index, name in enumerate(cited_names):
+            candidates = [i for i, pair in enumerate(canonical) if i not in used and name_matches(name, *pair)]
+            if candidates:
+                chosen = index if index in candidates else candidates[0]
+                used.add(chosen)
+                matched_positions.append(chosen)
+            else:
+                unmatched_visible.append(name)
+        order = matched_positions == sorted(matched_positions)
+        missing = [record["surnames"][i] for i in range(len(canonical)) if i not in used]
+        insufficient = len(cited_names) > len(canonical)
     return {"title_score": score, "author_match": first_match, "missing": missing,
-            "author_order": present == sorted(present), "year_match": reference.get("year") in record["years"]}
+            "author_order": order, "author_metadata_incomplete": insufficient,
+            "unmatched_visible_authors": [] if insufficient else unmatched_visible,
+            "year_match": reference.get("year") in record["years"]}
 
 
 def rank_candidates(reference: dict, items: list[dict]) -> list[tuple[float, dict]]:
@@ -121,13 +160,17 @@ def assess(reference: dict, record: dict, via_doi: bool, ambiguous: bool = False
     checks.append({"field": "발행연도", "status": "match" if year_match else "review", "detail": ", ".join(record["years"]) or "등록정보 없음"})
     if not year_match:
         issues.append("발행연도를 확인해 주세요. 온라인·인쇄 발행연도는 다를 수 있습니다.")
-    truncated = bool(re.search(r"et\s+al|\.\s*\.\s*\.|…|외\s*\d*명?", reference["raw"], re.I))
+    truncated = reference.get("authors_truncated", False) or bool(re.search(r"et\s+al|and\s+\d+\s+others?|\.\s*\.\s*\.|…|외\s*\d*명?", reference["raw"], re.I))
+    partial_authors = truncated or sig["author_metadata_incomplete"] or not record["surnames"]
     missing = sig["missing"]
-    if not truncated and not sig["author_order"]:
+    visible_mismatch = sig["unmatched_visible_authors"]
+    if visible_mismatch:
+        issues.append("표시된 저자명을 등록정보와 대조해 주세요: " + ", ".join(visible_mismatch))
+    if not sig["author_metadata_incomplete"] and not sig["author_order"]:
         issues.append("저자 성씨가 나열된 순서가 등록정보와 다를 수 있습니다.")
-    checks.append({"field": "전체 저자", "status": "unverified" if truncated or not record["surnames"] else ("review" if missing or not sig["author_order"] else "match"),
-                   "detail": "축약 표기: 전체 저자 대조 필요" if truncated else ("누락·오탈자 후보: " + ", ".join(missing) if missing else "등록된 성씨가 인용에 포함됨; 이니셜·순서는 수동 확인")})
-    if missing and not truncated:
+    checks.append({"field": "전체 저자", "status": "review" if visible_mismatch or not sig["author_order"] else "unverified" if partial_authors else ("review" if missing else "match"),
+                   "detail": "축약 표기 또는 등록정보 부족: 전체 저자 대조 범위 제한" if partial_authors else ("누락·오탈자 후보: " + ", ".join(missing) if missing else "구조화된 저자명·순서 대조" if reference.get("parsed_authors") else "등록된 성씨가 인용에 포함됨; 이니셜·순서는 수동 확인")})
+    if missing and not partial_authors:
         issues.append("일부 저자 성씨가 인용 표기에서 확인되지 않습니다: " + ", ".join(missing))
     # Search scores are similarity signals, never probabilities of correctness.
     status = "matched" if title_score >= 96 and author_match and year_match and not issues else "review"
@@ -197,7 +240,12 @@ async def verify_reference(reference: dict, client: httpx.AsyncClient, use_ai: b
         ambiguous = False
         if work is None:
             query = re.sub(r"(?:https?://(?:dx\.)?doi\.org/|doi\s*:\s*)?10\.\d{4,9}/\S+", "", reference["raw"], flags=re.I)
-            payload = await get_json(client, "https://api.crossref.org/works", params={"query.bibliographic": query[:1500], "rows": 5})
+            if reference.get("parse_status") == "structured" and reference.get("title"):
+                first_author = (reference.get("parsed_authors") or [reference.get("first_surname", "")])[0]
+                params = {"query.title": reference["title"][:1000], "query.author": first_author[:200], "rows": 5}
+            else:
+                params = {"query.bibliographic": query[:1500], "rows": 5}
+            payload = await get_json(client, "https://api.crossref.org/works", params=params)
             items = payload["message"].get("items", [])
             ranked = rank_candidates(reference, items)
             if not ranked or ranked[0][0] < 50:

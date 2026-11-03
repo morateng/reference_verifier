@@ -13,6 +13,16 @@ $('#check-connection').addEventListener('click',async()=>{
   const button=$('#check-connection'),out=$('#connection-result');button.disabled=true;out.hidden=false;out.textContent='등록기관 연결을 확인하고 있습니다…';
   try{const response=await fetch('/api/diagnostics');if(!response.ok)throw new Error();const data=await response.json();out.replaceChildren(...data.sources.map(x=>el('div',`${x.source}: ${x.ok?'정상':'실패'} · ${x.reason}`)),el('small',data.note));}catch{out.textContent='연결 점검을 실행하지 못했습니다. 코드를 업데이트하고 서버를 재시작해 주세요.';}finally{button.disabled=false;}
 });
+$('#preview-parsing').addEventListener('click',async()=>{
+  const file=$('#pdf').files[0];if(!file){error('먼저 PDF를 선택해 주세요.');return;}
+  const button=$('#preview-parsing');button.disabled=true;error('');
+  const data=new FormData();data.append('file',file);
+  try{const response=await fetch('/api/parse',{method:'POST',body:data});const parsed=await response.json();if(!response.ok)throw new Error(typeof parsed.detail==='string'?parsed.detail:'파싱 미리보기에 실패했습니다.');
+    $('#parse-preview').hidden=false;$('#parse-summary').textContent=`${parsed.page_count}페이지 · 추출 ${parsed.references.length}개 · 필드 구조화 ${parsed.structured_count}개 · ${parsed.parsing?.method==='pdf_hanging_indent'?'PDF 좌표·들여쓰기 분석':'텍스트 형식 분석'}`;
+    $('#parse-list').replaceChildren(...parsed.references.map(r=>{const d=el('details',undefined,'reference'),summary=el('summary',`[${r.label}] ${r.title||r.raw}`);d.append(summary);const content=el('div',undefined,'ref-detail');content.append(renderParsed(r),el('h3','추출한 원래 표기'),el('div',r.raw,'raw'));d.append(content);return d;}));
+    $('#parse-preview').scrollIntoView({behavior:'smooth'});
+  }catch(e){error(e.message);}finally{button.disabled=false;}
+});
 $('#upload-form').addEventListener('submit',async(event)=>{
   event.preventDefault();error('');const file=$('#pdf').files[0];if(!file)return;
   if(file.size>20*1024*1024){error('PDF는 최대 20MB까지 업로드할 수 있습니다.');return;}
@@ -47,9 +57,18 @@ function render(){
   $('#stats').replaceChildren(...statistics.map(([label,n])=>{const node=el('div',undefined,'stat');node.append(el('strong',String(n)),el('span',label));return node;}));
   renderDiagnosis(j);$('#scope').textContent=j.scope;renderList();
 }
+function renderParsed(r){
+  const box=el('div',undefined,'parsed-fields');box.append(el('h3','구조화된 서지정보'));
+  const fields=[['저자',r.parsed_authors?.join('; ')||r.author_text||'구조화 미완료'],['연도',r.year?(r.year+(r.year_suffix||'')):'미추출'],['제목',r.title||'구조화 미완료'],['출처 위치',r.source_pages?.length?`PDF ${r.source_pages.join(', ')}페이지`:'텍스트 추출'],['파싱 상태',r.parse_status==='structured'?'필드 추출됨 · 정보 정확성 판정 아님':'형식 확인 필요']];
+  for(const [label,value] of fields){const row=el('div',undefined,'check');row.append(el('strong',label),el('span',value));box.append(row);}
+  if(r.authors_truncated)box.append(el('p','원문에 저자 축약 표기가 있습니다. 전체 저자를 누락으로 단정하지 않습니다.'));
+  for(const warning of r.parse_warnings||[])box.append(el('p',warning,'issue'));
+  return box;
+}
 function renderDiagnosis(job){
   const box=$('#diagnosis'),d=job.diagnosis;box.replaceChildren();if(!d)return;
   box.append(el('h3','검증 단계별 결과 · '+(job.version||'버전 미상')));
+  if(job.parsing)box.append(el('p',`파싱: ${job.parsing.method==='pdf_hanging_indent'?'PDF 좌표·들여쓰기 분석':'텍스트 형식 분석'} · 필드 구조화 ${job.structured_count||0}/${job.total}개`));
   box.append(el('p',`입력 DOI 등록 확인 ${d.doi_registered}개 · arXiv ID 확인 ${d.arxiv_registered||0}개 · 제목/첫 저자/연도 일치 ${d.major_fields_match}개 · AI 초록 검토 ${d.abstract_reviewed}개`));
   if(d.lookup_failed)box.append(el('p',`외부 조회 실패 ${d.lookup_failed}개: ${Object.entries(d.lookup_errors).map(([k,v])=>`${k} ${v}개`).join(', ')}. 검색 연결 점검으로 원인을 확인하세요.`));
   if(d.unresolved)box.append(el('p',`검색 미해결 ${d.unresolved}개: 검색 범위·추출 표기를 확인해야 합니다. 논문이 없다는 판정이 아닙니다.`));
@@ -71,7 +90,7 @@ function renderReference(r,isOpen){
   main.append(el('div',r.record?.title||r.raw,'ref-title'),el('div',r.record?`${r.record.authors.slice(0,2).join(', ')}${r.record.authors.length>2?' 외':''} · ${r.record.years.join('/')} · ${r.record.journal}`:'등록정보 대조 결과를 확인해 주세요.','ref-meta'));
   if(r.evidence){const e=r.evidence;const registry={doi_registered:'입력 DOI 등록 확인',arxiv_registered:'입력 arXiv ID 등록 확인',search_candidate:'검색 후보 정보 조회',lookup_failed:'등록기관 조회 실패',not_resolved:'등록정보 미해결'};main.append(el('div',`${registry[e.registry]} · 동일 논문 대조: ${e.identity==='major_fields_match'?'주요 3개 정보 일치':'확정 전'} · 내용: ${e.content==='abstract_only'?'초록만 검토':'미검증'}`,'evidence-line'));}
   summary.append(el('span',`[${r.label}]`,'ref-number'),main,el('span',labels[r.status],`badge ${r.status}`));node.append(summary);
-  const detail=el('div',undefined,'ref-detail');detail.append(el('h3','PDF에서 추출한 원래 표기'),el('div',r.raw,'raw'));
+  const detail=el('div',undefined,'ref-detail');detail.append(el('h3','PDF에서 추출한 원래 표기'),el('div',r.raw,'raw'),renderParsed(r));
   for(const flag of r.extraction_flags||[])detail.append(el('p',flag,'issue'));
   for(const issue of r.issues)detail.append(el('p','• '+issue,'issue'));
   if(r.checks.length){detail.append(el('h3','항목별 대조'));for(const check of r.checks){const line=el('div',undefined,'check');line.append(el('strong',check.field),el('span',check.status==='match'?'✓':check.status==='review'?'△':'—','check-mark'),el('span',check.detail));detail.append(line);}}
